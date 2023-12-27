@@ -23156,7 +23156,7 @@ static ma_result ma_device_init__coreaudio(ma_device* pDevice, const ma_device_c
         data.allowNominalSampleRateChange = pConfig->coreaudio.allowNominalSampleRateChange;
         data.formatIn                     = pDescriptorCapture->format;
         data.channelsIn                   = pDescriptorCapture->channels;
-        data.sampleRateIn                 = pDescriptorCapture->sampleRate;
+        data.sampleRateIn                 = pConfig->resampling.sampleRateIn != 0 ? pConfig->resampling.sampleRateIn : pDescriptorCapture->sampleRate;
         MA_COPY_MEMORY(data.channelMapIn, pDescriptorCapture->channelMap, sizeof(pDescriptorCapture->channelMap));
         data.periodSizeInFramesIn         = pDescriptorCapture->periodSizeInFrames;
         data.periodSizeInMillisecondsIn   = pDescriptorCapture->periodSizeInMilliseconds;
@@ -23213,7 +23213,7 @@ static ma_result ma_device_init__coreaudio(ma_device* pDevice, const ma_device_c
         data.allowNominalSampleRateChange   = pConfig->coreaudio.allowNominalSampleRateChange;
         data.formatIn                       = pDescriptorPlayback->format;
         data.channelsIn                     = pDescriptorPlayback->channels;
-        data.sampleRateIn                   = pDescriptorPlayback->sampleRate;
+        data.sampleRateIn                   = pConfig->resampling.sampleRateOut != 0 ? pConfig->resampling.sampleRateOut : pDescriptorPlayback->sampleRate;
         MA_COPY_MEMORY(data.channelMapIn, pDescriptorPlayback->channelMap, sizeof(pDescriptorPlayback->channelMap));
         data.shareMode                      = pDescriptorPlayback->shareMode;
         data.performanceProfile             = pConfig->performanceProfile;
